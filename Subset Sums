@@ -1,0 +1,38 @@
+Given a list arr of N integers, return sums of all subsets in it.
+
+ 
+
+Example 1:
+
+Input:
+N = 2
+arr[] = {2, 3}
+Output:
+0 2 3 5
+Explanation:
+When no elements is taken then Sum = 0.
+When only 2 is taken then Sum = 2.
+When only 3 is taken then Sum = 3.
+When element 2 and 3 are taken then 
+Sum = 2+3 = 5.
+
+
+
+
+def subsetSums(N, arr):
+    subsets = []
+    for i in range(1 << N):  # Generate all possible subsets using binary representation
+        subset = []
+        for j in range(N):
+            if (i & (1 << j)) != 0:
+                subset.append(arr[j])
+        subsets.append(subset)
+    
+    sums = [sum(subset) for subset in subsets]
+    return sorted(sums)
+
+# Example usage
+N = 2
+arr = [2, 3]
+result = subsetSums(N, arr)
+print(*result)
